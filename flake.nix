@@ -19,6 +19,14 @@
             doCheck = false;
             nativeBuildInputs = with pkgs; [ cmake ];
             buildInputs = with pkgs; [ curl openssl libiconv ];
+
+            installPhase = ''
+              make install
+
+              mkdir -p $out/bin
+              cp $src/bin/ext_key.txt $out/bin/
+              cp $src/bin/ignore_3dstool.txt $out/bin/
+            '';
           };
         in {
           packages.tool3ds = _3dstool;
